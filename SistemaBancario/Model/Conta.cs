@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SistemaBancario.Model
 {
-    public class Conta
+    public abstract class Conta
     {
         public long Numero { get; private set; }
         public decimal Saldo { get; protected set; }
@@ -27,21 +27,23 @@ namespace SistemaBancario.Model
             Titular = cliente;
         }
         public virtual void Depositar(decimal valor)
+        
         {
             if (valor <= 0)
-                throw new ArgumentException("O valor do depósito deve ser maior que zero.");
+                throw new ArgumentException(nameof(valor), "O valor do depósito deve ser maior que zero.");
             Saldo += valor; // Saldo = Saldo + valor;
-        }
 
+        }
         public virtual void Sacar(decimal valor)
+        
         {
             if (valor <= 0)
-                throw new ArgumentException("O valor do saque deve ser maior que zero.");
+                throw new ArgumentException(nameof(valor), "O valor do saque deve ser maior que zero.");
             if (valor > Saldo)
                 throw new InvalidOperationException("Saldo insuficiente para realizar o saque.");
             Saldo -= valor; //Saldo = Saldo - valor;
-        }
 
+        }
         public virtual void Transferir(decimal valor, Conta contaDestino)
         {
             if (contaDestino == null)
