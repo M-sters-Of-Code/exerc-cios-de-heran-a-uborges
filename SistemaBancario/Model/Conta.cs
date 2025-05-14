@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SistemaBancario.Model
 {
-    public abstract class Conta
+    public class Conta
     {
         public long Numero { get; private set; }
         public decimal Saldo { get; protected set; }
